@@ -29,6 +29,15 @@ namespace CardEditor
         private const string ModName = "Card Editor"; // Mod Name
         public const string Version = "0.0.1"; // What version are we on (major.minor.build.revision)?
 
+        void Awake()
+        {
+            // Use this to call any harmony patch files your mod may have
+            var harmony = new Harmony(ModId);
+            harmony.PatchAll();
+        }
+        void Start()
+        {
 
+        }
     }
 }
