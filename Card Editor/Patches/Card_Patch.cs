@@ -9,15 +9,16 @@ using UnityEngine;
 
 namespace CardEditor.Patches
 {
-    [HarmonyPatch(typeof(Card))]
+    
     class Card_Patch
     {
-        [HarmonyPrefix]
-        [HarmonyDebug]
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(Card))]
         [HarmonyPatch(MethodType.Constructor)]
-        static void CardBuilt(string category, bool enabled, ref CardInfo cardInfo)
+        [HarmonyPatch(new Type[] {typeof(String), typeof(String), typeof(CardInfo)})]
+        static void CardBuild(Card __instance)
         {
-            UnityEngine.Debug.Log("[Card Editor] " + cardInfo.cardName + " built");
+            UnityEngine.Debug.Log("[Card Editor] " + __instance.cardInfo.cardName + " built");
         }
 
         //[HarmonyPostfix]
